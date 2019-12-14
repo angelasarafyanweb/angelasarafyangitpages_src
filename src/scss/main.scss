@@ -1,0 +1,36 @@
+$clrbg: #333333;
+$clrtext: #eeeeee;
+
+
+* {
+	padding: 0;
+	margin: 0;
+
+}
+
+body {
+	background: $clrbg;
+	color: $clrtext;
+	margin: 1em;
+}
+
+p, h1, h2, h3, h4 {
+	margin-bottom: 1em;
+}
+
+ul.home_images {
+	list-style: none;
+
+	li {
+		margin-right: 1em;
+		display: inline;
+
+		img {
+			width: 30%;
+		}
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}

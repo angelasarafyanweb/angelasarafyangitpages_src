@@ -1,0 +1,10 @@
+{% include "_header.njk" %}
+<h2>Beginning of new Angela Sarafyan site</h2>
+
+<ul class="home_images">
+{% for image in home.images -%}
+<li><img src="{{ image }}"></li>
+{% endfor -%}
+</ul>
+
+{% include "_footer.njk" %}

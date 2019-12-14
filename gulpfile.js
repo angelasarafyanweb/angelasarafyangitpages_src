@@ -23,11 +23,23 @@ const babel = require('gulp-babel');
   Transpile modern ES6+ from /js into ES5 and place in /src_js
 */
 const transpilejs = () => {
-  return src('./gulpsrc/js/*.js')
+  return src('./gulpsrc/es/*.js')
     .pipe(babel({
             presets: ['@babel/env']
         }))
     .pipe(dest('./gulpsrc/src_js'));
+};
+
+/*
+Minify JS from /src_js and place in /js
+*/
+const compressjs = () => {
+  return pump([
+       src('./gulpsrc/src_js/**/*.js'),
+       uglify(),
+       dest('./public/js')
+      ]
+    );
 };
 
 /*
@@ -51,17 +63,6 @@ const compresscss = () => {
     .pipe(dest('./public/css'));
 };
 
-/*
-Minify JS from /src_js and place in /js
-*/
-const compressjs = () => {
-  return pump([
-       src('./gulpsrc/src_js/**/*.js'),
-       uglify(),
-       dest('./public/js')
-      ]
-    );
-};
 
 /*
 copy html files created by eleventy to /public
