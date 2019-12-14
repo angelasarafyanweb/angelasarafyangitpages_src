@@ -1,0 +1,28 @@
+{
+  "name": "angelagithubpages-02",
+  "version": "1.0.0",
+  "description": "Angela Sarafyan web site on Github Pages",
+  "main": "index.html",
+  "scripts": {
+    "render": "npx eleventy",
+    "bundle": "gulp all",
+    "bundle-auto": "gulp monitor",
+    "serve": "http-server",
+    "all": "npm-run-all --sequential render bundle"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.9.0",
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0-beta.2",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2",
+    "gulp-uglifycss": "^1.1.0",
+    "http-server": "^0.12.0",
+    "npm-run-all": "^4.1.5",
+    "pump": "^3.0.0"
+  }
+}
