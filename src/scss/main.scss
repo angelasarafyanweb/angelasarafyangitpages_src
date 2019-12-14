@@ -20,17 +20,26 @@ p, h1, h2, h3, h4 {
 
 ul.home_images {
 	list-style: none;
+	display: flex;
 
 	li {
-		margin-right: 1em;
-		display: inline;
+		margin-right: 0;
 
 		img {
-			width: 30%;
+			width: 100%;
+			display: block;
 		}
 
 		&:last-child {
 			margin-right: 0;
 		}
+	}
+}
+
+@media(max-width: 360px) {
+	ul.home_images {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
 	}
 }
