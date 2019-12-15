@@ -3,7 +3,7 @@
 
 As of this commit, the new site is planned to be static pages rendered with EleventyJS, transpiled with Gulp.
 
-It will be seperate pages, instead of a SPA, consisting of:
+It will be separate pages, consisting of:
 
 * Home
 * News
