@@ -79,12 +79,6 @@ const copy = () => {
     .pipe(dest('./public'));
 };
 
-
-// const watcher = () => {
-// 	return watch('./gulpsrc/**/*.*', copy);
-// };
-
-// exports.monitor = watcher;
 exports.all = series(transpilescss, compresscss, transpilejs, compressjs, copy);
 
 
