@@ -12,6 +12,7 @@ body {
 	background: $clrbg;
 	color: $clrtext;
 	margin: 1em;
+	font-family: 'Arial', sans-serif;
 }
 
 p, h1, h2, h3, h4 {
@@ -36,7 +37,16 @@ ul.home_images {
 	}
 }
 
-@media(max-width: 360px) {
+.main_caption {
+	text-align: center;
+}
+
+.main_footer {
+	padding: 1em;
+	text-align: center;
+}
+
+@media(max-width: 600px) {
 	ul.home_images {
 		list-style: none;
 		display: flex;
