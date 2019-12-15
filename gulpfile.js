@@ -10,6 +10,16 @@ npm i -D pump
 npm i -D gulp-babel@next @babel/core @babel/preset-env
 */
 
+/*
+This is for use with EleventyJS.
+Run 'eleventy' then run 'gulp all'.
+Eleventy renders from /src into /gulp_src.
+Gulp transpiles scss and js from /gulp_src into /gulp_tmp,
+then compresses css and js from /gulp_tmp into /public,
+then copies other files from /gulp_src into /public also.
+To browse /public, http-server can be used.
+*/
+
 const { src, dest, series, parallel, watch } = require('gulp');
 const sass = require('gulp-sass');
 var uglifycss = require('gulp-uglifycss');
@@ -23,11 +33,11 @@ const babel = require('gulp-babel');
   Transpile modern ES6+ from /js into ES5 and place in /src_js
 */
 const transpilejs = () => {
-  return src('./gulpsrc/es/*.js')
+  return src('./gulp_src/es/*.js')
     .pipe(babel({
             presets: ['@babel/env']
         }))
-    .pipe(dest('./gulpsrc/src_js'));
+    .pipe(dest('./gulp_tmp/src_js'));
 };
 
 /*
@@ -35,7 +45,7 @@ Minify JS from /src_js and place in /js
 */
 const compressjs = () => {
   return pump([
-       src('./gulpsrc/src_js/**/*.js'),
+       src('./gulp_tmp/src_js/**/*.js'),
        uglify(),
        dest('./public/js')
       ]
@@ -46,16 +56,16 @@ const compressjs = () => {
 Transpile SCSS from /scss into CSS and place in /src_css
 */
 const transpilescss = () => {
-    return src('./gulpsrc/scss/*.scss')
+    return src('./gulp_src/scss/*.scss')
     .pipe(sass())
-    .pipe(dest('./gulpsrc/src_css'));
+    .pipe(dest('./gulp_tmp/src_css'));
 };
 
 /*
 Minify CSS from /src_css and place in /css
 */
 const compresscss = () => {
-  return src('./gulpsrc/src_css/**/*.css')
+  return src('./gulp_tmp/src_css/**/*.css')
     .pipe(uglifycss({
       "maxLineLen": 0,
       "uglyComments": true
@@ -70,24 +80,15 @@ copy html files created by eleventy to /public
 const copy = () => {
     return src(
       [
-        './gulpsrc/**/*.html',
-        './gulpsrc/**/*.jpg',
-        './gulpsrc/**/*.gif',
-        './gulpsrc/**/*.png'
+        './gulp_src/**/*.html',
+        './gulp_src/**/*.jpg',
+        './gulp_src/**/*.gif',
+        './gulp_src/**/*.png'
       ], 
-      {base: './gulpsrc'})
+      {base: './gulp_src'})
     .pipe(dest('./public'));
 };
 
 exports.all = series(transpilescss, compresscss, transpilejs, compressjs, copy);
-
-
-
-
-
-
-
-
-
 
 

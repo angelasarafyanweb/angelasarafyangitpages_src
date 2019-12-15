@@ -1,3 +1,4 @@
 node_modules
-gulpsrc
+gulp_src
+gulp_tmp
 public
