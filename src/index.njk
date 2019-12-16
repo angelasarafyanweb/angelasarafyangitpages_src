@@ -1,10 +1,13 @@
 {% include "_header.njk" %}
-<h2 class="main_caption">Beginning of new Angela Sarafyan site</h2>
 
-<ul class="home_images">
-{% for image in home.images -%}
-<li><img src="{{ image }}"></li>
-{% endfor -%}
-</ul>
 
+<div class="banner">
+  <h2 class="main_caption">Beginning of new Angela Sarafyan site</h2>
+
+  <ul class="home_images">
+  {% for image in home.images -%}
+  <li><img src="{{ image }}"></li>
+  {% endfor -%}
+  </ul>
+</div>
 {% include "_footer.njk" %}

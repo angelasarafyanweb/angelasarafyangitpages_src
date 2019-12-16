@@ -30,42 +30,11 @@ const babel = require('gulp-babel');
 /* functions */
 
 /*
-  Transpile modern ES6+ from /js into ES5 and place in /src_js
+Transpile and minify SCSS from /scss into CSS and place in /punlic
 */
-const transpilejs = () => {
-  return src('./gulp_src/es/*.js')
-    .pipe(babel({
-            presets: ['@babel/env']
-        }))
-    .pipe(dest('./gulp_tmp/src_js'));
-};
-
-/*
-Minify JS from /src_js and place in /js
-*/
-const compressjs = () => {
-  return pump([
-       src('./gulp_tmp/src_js/**/*.js'),
-       uglify(),
-       dest('./public/js')
-      ]
-    );
-};
-
-/*
-Transpile SCSS from /scss into CSS and place in /src_css
-*/
-const transpilescss = () => {
+const proccss = () => {
     return src('./gulp_src/scss/*.scss')
     .pipe(sass())
-    .pipe(dest('./gulp_tmp/src_css'));
-};
-
-/*
-Minify CSS from /src_css and place in /css
-*/
-const compresscss = () => {
-  return src('./gulp_tmp/src_css/**/*.css')
     .pipe(uglifycss({
       "maxLineLen": 0,
       "uglyComments": true
@@ -73,6 +42,20 @@ const compresscss = () => {
     .pipe(dest('./public/css'));
 };
 
+/*
+  Transpile and minify modern ES6+ from /js into ES5 and place in /public
+*/
+const procjs = () => {
+  return pump([
+       src('./gulp_src/js/*.js'),
+       babel({
+            presets: ['@babel/env']
+       }),
+       uglify(),
+       dest('./public/js')
+      ]
+    );
+};
 
 /*
 copy html files created by eleventy to /public
@@ -84,11 +67,9 @@ const copy = () => {
         './gulp_src/**/*.jpg',
         './gulp_src/**/*.gif',
         './gulp_src/**/*.png'
-      ], 
+      ],
       {base: './gulp_src'})
     .pipe(dest('./public'));
 };
 
-exports.all = series(transpilescss, compresscss, transpilejs, compressjs, copy);
-
-
+exports.all = series(proccss, procjs, copy);
