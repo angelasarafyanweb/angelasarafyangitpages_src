@@ -7,4 +7,4 @@ module.exports = (eleventyConfig) => {
 
 	    templateFormats: ["html", "njk", "md", "scss", "js", "jpg", "gif", "png"]
 	};
-};
+};    
